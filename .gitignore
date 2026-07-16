@@ -1,0 +1,6 @@
+# Ne pas envoyer la base de données locale SQLite
+imna_pfe.db
+
+# Ignorer d'éventuels fichiers de logs ou temporaires de SQLite
+*.db-journal
+*.db-wal
