@@ -15,4 +15,8 @@ class Service extends Model
     protected $fillable = [
         'id_service'
     ];
+    public function materiels()
+    {
+        return $this->hasMany(Materiel::class, 'id_service', 'id_service');
+    }
 }

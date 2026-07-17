@@ -20,4 +20,16 @@ class Panne extends Model
         'id_materiel',
         'id_employe'
     ];
+    public function materiel()
+    {
+        return $this->belongsTO (Materiel::class, 'id_materiel', 'id');
+    }
+    public function declarant()
+    {
+        return $this->belongsTo (Utilisateur::class, 'id_employe', 'id_utilisateur');
+    }
+    public function reparations()
+    {
+        return $this->hasMany(Reparation::class,'id_panne', 'id');
+    }
 }

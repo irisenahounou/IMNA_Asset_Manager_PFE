@@ -21,5 +21,17 @@ class Reparation extends Model
         'id_panne',
         'id_technicien'
     ];
+    public function panne()
+    {
+        return $this->belongsTo(Panne::class, 'id_panne', 'id');
+    }
+    public function technicien()
+    {
+        return $this->belongsTo(Utilisateur::class, 'id_technicien', 'id_utilisateur');
+    }
+    public function detailsCorrective()
+    {
+        return $this->hasOne(Corrective::class, 'id_corrective', 'id');
+    }
 
 }

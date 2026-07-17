@@ -20,4 +20,8 @@ class Utilisateur extends Model
         'mot_de_passe',
         'statut_compte',
     ];
+    public function pannesDeclarees()
+    {
+        return $this->hasMany(Panne::class,'id_employe','id_utilisateur');
+    }
 }

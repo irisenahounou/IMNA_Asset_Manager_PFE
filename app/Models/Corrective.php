@@ -17,4 +17,8 @@ class Corrective extends Model
         'id_corrective',
         'id_panne'
     ];
+    public function reparation()
+    {
+        return $this->belongsTo(Reparation::class, 'id_corrective', 'id');
+    }
 }

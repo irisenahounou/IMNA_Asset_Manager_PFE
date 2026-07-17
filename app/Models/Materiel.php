@@ -23,4 +23,12 @@ class Materiel extends Model
         'id_service',
         'id_responsable',
     ];
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'id_service', 'id_service');
+    }
+    public function pannes()
+    {
+        return $this->hasMany(Panne::class,'id_materiel', 'id');
+    }
 }
