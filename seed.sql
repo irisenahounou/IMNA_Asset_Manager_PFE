@@ -5,16 +5,17 @@ PRAGMA foreign_keys = ON;
 INSERT INTO Service (nom_service) VALUES ('Direction des Systèmes d''Information (DSI)');
 
 -- 2. Insertion des Utilisateurs (Table Mère)
--- Mot de passe fictif 'password123' (sera hashé plus tard en Laravel)
-INSERT INTO Utilisateur (id, nom, prenom, email, mot_passe, statut_compte) VALUES 
+-- Changement ici : 'id' devient 'id_utilisateur'
+INSERT INTO Utilisateur (id_utilisateur, nom, prenom, email, mot_passe, statut_compte) VALUES 
 (1, 'Nahounou', 'Irise', 'irise.responsable@imna.com', 'password123', 1),
 (2, 'Dupont', 'Jean', 'jean.technicien@imna.com', 'password123', 1),
 (3, 'Martin', 'Alice', 'alice.employe@imna.com', 'password123', 1);
 
 -- 3. Liaisons d'héritage (Tables Filles)
-INSERT INTO Responsable (id_responsable, id_utilisateur) VALUES (1, 1);
-INSERT INTO Technicien (id_technicien, disponibilite, id_utilisateur) VALUES (2, 1, 2);
-INSERT INTO Employe (id_employe, id_utilisateur) VALUES (3, 3);
+-- Changement ici : On ne met plus que l'ID propre à la table fille
+INSERT INTO Responsable (id_responsable) VALUES (1);
+INSERT INTO Technicien (id_technicien, disponibilite) VALUES (2, 1);
+INSERT INTO Employe (id_employe) VALUES (3);
 
 -- 4. Insertion de Matériels (Liés au Service 1 et au Responsable 1)
 INSERT INTO Materiel (id, numero_serie, nom_equipement, type, date_achat, etat_operationnel, id_service, id_responsable) VALUES 

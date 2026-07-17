@@ -7,7 +7,7 @@ create table if NOT EXISTS Service (
 
 --table utilisateurs(table mère)
 create Table IF NOT EXISTS Utilisateur (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(255) NOT NULL,
     prenom VARCHAR(255) NOT NULL,
     email VARCHAR(255) unique NOT NULL,
@@ -20,9 +20,8 @@ create Table IF NOT EXISTS Utilisateur (
 
 create table IF NOT EXISTS Employe(
     id_employe INTEGER PRIMARY KEY,
-    id_utilisateur INTEGER NOT NULL,
-    foreign key (id_employe) REFERENCES Utilisateur(id) on delete CASCADE,
-    foreign key (id_utilisateur) REFERENCES Utilisateur(id) on delete CASCADE
+    foreign key (id_employe) REFERENCES Utilisateur(id_utilisateur) on delete CASCADE
+
 
 );
 
@@ -31,9 +30,8 @@ create table IF NOT EXISTS Employe(
 create Table if NOT EXISTS Responsable(
     id_responsable INTEGER PRIMARY KEY,
     disponibilite boolean DEFAULT 1 NOT NULL,
-    id_utilisateur INTEGER NOT NULL,
-    foreign KEY (id_responsable) REFERENCES Utilisateur(id) on delete CASCADE,
-    foreign KEY (id_utilisateur) REFERENCES Utilisateur(id) on delete CASCADE
+    foreign KEY (id_responsable) REFERENCES Utilisateur(id_utilisateur) on delete CASCADE
+
 
 );
 
@@ -42,9 +40,7 @@ create Table if NOT EXISTS Responsable(
 create Table IF NOT EXISTS Technicien(
     id_technicien INTEGER PRIMARY KEY,
     disponibilite boolean DEFAULT 1 NOT NULL,
-    id_utilisateur INTEGER not NULL,
-    foreign KEY (id_technicien) REFERENCES Utilisateur(id) on delete cascade,
-    foreign KEY (id_utilisateur) REFERENCES Utilisateur(id) on delete CASCADE
+    foreign KEY (id_technicien) REFERENCES Utilisateur(id_utilisateur) on delete cascade
 
 );
 

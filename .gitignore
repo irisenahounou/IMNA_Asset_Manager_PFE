@@ -1,6 +1,32 @@
-# Ne pas envoyer la base de données locale SQLite
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+Thumbs.db
+# Base de données IMNA
 imna_pfe.db
-
-# Ignorer d'éventuels fichiers de logs ou temporaires de SQLite
+imna_pfe.sqbpro
 *.db-journal
 *.db-wal
