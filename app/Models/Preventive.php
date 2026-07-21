@@ -9,14 +9,18 @@ class Preventive extends Model
 {
     use HasFactory;
     protected $table = 'Preventive';
-    protected $primarykey ='id_preventive';
-    protected $keytype = 'string';
+    protected $primaryKey ='id_preventive';
+    protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
         'id_preventive',
-        'id_panne',
+        'id_materiel',
         'frequence_jour',
         'prochaine_rep'
     ];
+    public function panne()
+    {
+        return $this->belongsTo(Panne::class, 'id_materiel', 'id');
+    }
 }

@@ -7,9 +7,9 @@ INSERT INTO Service (nom_service) VALUES ('Direction des Systèmes d''Informatio
 -- 2. Insertion des Utilisateurs (Table Mère)
 -- Changement ici : 'id' devient 'id_utilisateur'
 INSERT INTO Utilisateur (id_utilisateur, nom, prenom, email, mot_passe, statut_compte) VALUES 
-(1, 'Nahounou', 'Irise', 'irise.responsable@imna.com', 'password123', 1),
-(2, 'Dupont', 'Jean', 'jean.technicien@imna.com', 'password123', 1),
-(3, 'Martin', 'Alice', 'alice.employe@imna.com', 'password123', 1);
+(1, 'Nahounou', 'Irise', 'irise.responsable@imna.com', '$2y$10$wKxI78l3fS/l29XN5Z3/I.32F.IofXvS5U7wGq.gCpeE8uS3eGjEq', 1),
+(2, 'Dupont', 'Jean', 'jean.technicien@imna.com', '$2y$10$wKxI78l3fS/l29XN5Z3/I.32F.IofXvS5U7wGq.gCpeE8uS3eGjEq', 1),
+(3, 'Martin', 'Alice', 'alice.employe@imna.com', '$2y$10$wKxI78l3fS/l29XN5Z3/I.32F.IofXvS5U7wGq.gCpeE8uS3eGjEq', 1);
 
 -- 3. Liaisons d'héritage (Tables Filles)
 -- Changement ici : On ne met plus que l'ID propre à la table fille

@@ -9,10 +9,10 @@ class Materiel extends Model
 {
     use HasFactory;
     protected $table = 'Materiel';
-    protected $primarykey = 'id';
-    protected $keytype = 'string';
-    public $incrementing = 'false';
-    public $timestamps ='false';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'numero_serie',

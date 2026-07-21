@@ -9,8 +9,8 @@ class Reparation extends Model
 {
     use HasFactory;
     protected $table = 'Reparation';
-    protected $primarykey = 'id';
-    protected $keytype = 'string';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
@@ -27,7 +27,7 @@ class Reparation extends Model
     }
     public function technicien()
     {
-        return $this->belongsTo(Utilisateur::class, 'id_technicien', 'id_utilisateur');
+        return $this->belongsTo(Technicien::class, 'id_technicien', 'id_technicien');
     }
     public function detailsCorrective()
     {

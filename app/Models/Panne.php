@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Panne extends Model
 {
     use HasFactory;
-    protected $table ='Panne';
-    protected $primarykey ='id';
+    protected $table = 'Panne';
+    protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
     protected $fillable = [
-        'titre',
+       'titre',
         'description',
         'date_declaration',
         'statut',
@@ -31,5 +31,9 @@ class Panne extends Model
     public function reparations()
     {
         return $this->hasMany(Reparation::class,'id_panne', 'id');
+    }
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class, 'id_employe', 'id_employe');
     }
 }

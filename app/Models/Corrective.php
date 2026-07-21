@@ -9,8 +9,8 @@ class Corrective extends Model
 {
     use HasFactory;
     protected $table = 'Corrective';
-    protected $primarykey = 'id_corrective';
-    protected $keytype = 'string';
+    protected $primaryKey = 'id_corrective';
+    protected $keyType= 'string';
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
