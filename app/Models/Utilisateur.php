@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class Utilisateur extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens,Notifiable;
     protected $table = 'Utilisateur';
     protected $primaryKey ='id_utilisateur';
     protected $keyType = 'int';
@@ -21,6 +24,10 @@ class Utilisateur extends Authenticatable
         'two_factor_secret',
         'statut_compte',
     ];
+    protected $hidden = [
+        'mot_passe',
+         'two_factor_secret',
+    ];
     public function getAuthPassword()
     {
         return $this->mot_passe;
@@ -32,9 +39,21 @@ class Utilisateur extends Authenticatable
     public function casts() : array
     {
         return [
-            'mot_passe' =>'hashed',
+            
         ];
 
+    }
+    // Le mutateur s'assure que le mot de passe est toujours haché, 
+    // mais ne le re-hache PAS s'il l'est déjà (évite le double hachage)
+    public function setMotPasseAttribute($value)
+    {
+        if (password_get_info($value)['algo'] !== 0) {
+            // Le mot de passe est déjà un hash, on le prend tel quel
+            $this->attributes['mot_passe'] = $value;
+        } else {
+            // C'est du texte en clair (futur utilisateur), on le hache
+            $this->attributes['mot_passe'] = Hash::make($value);
+        }
     }
     public function employe()
     {

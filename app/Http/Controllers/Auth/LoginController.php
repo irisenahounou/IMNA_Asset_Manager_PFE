@@ -23,7 +23,7 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
        $throttleKey = strtolower($request->input('email')) . '|' . $request->ip();
-       if (RateLimiter::tooManyAttempts($throttleKey, 5)){
+       if (RateLimiter::tooManyAttempts($throttleKey, 3)){
         $seconds = RateLimiter::availableIn($throttleKey);
         throw ValidationException::withMessages([
             'email' => ["Trop de tentatives de connexion. Veuillez réessayer dans {$seconds} secondes."],
@@ -31,7 +31,7 @@ class LoginController extends Controller
        } 
        $user = Utilisateur::where('email', $request->input('email'))->first();
        if (!$user || !Hash::check($request->input('password'), $user->mot_passe)){
-        RateLimiter::hit($throttleKey, 60);
+        RateLimiter::hit($throttleKey, 900);
         throw ValidationException::withMessages([
             'email' => ['Ces identifiants ne correspondent pas à nos enregistrements.'],
         ]);
@@ -53,6 +53,53 @@ class LoginController extends Controller
        $request->session()->regenerate();
        return redirect()->intended('/dashboard');
     
+    }
+    public function apiLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $throttleKey = strtolower($request->input('email')) . '|' . $request->ip();
+        
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            return response()->json([
+                'success' => false,
+                'message' => "Trop de tentatives de connexion. Veuillez réessayer dans {$seconds} secondes."
+            ], 429);
+        } 
+
+        $user = Utilisateur::where('email', $request->input('email'))->first();
+
+        if (!$user || !Hash::check($request->input('password'), $user->mot_passe)) {
+            RateLimiter::hit($throttleKey, 60);
+            return response()->json([
+                'success' => false,
+                'message' => 'Ces identifiants ne correspondent pas à nos enregistrements.'
+            ], 401);
+        }
+
+        RateLimiter::clear($throttleKey);
+
+        // Détermination du rôle pour l'application mobile
+        if ($user->estResponsable()) {
+            $roleTexte = 'responsable';
+        } elseif ($user->estTechnicien()) {
+            $roleTexte = 'technicien';
+        } else {
+            $roleTexte = 'employé';
+        }
+
+        // Note : Si l'utilisateur a activé le 2FA, l'app mobile devrait idéalement le gérer, 
+        // mais pour l'instant, on retourne le succès et son rôle directement :
+        return response()->json([
+            'success' => true,
+            'message' => 'Connexion réussie',
+            'role' => $roleTexte,
+            'user' => $user
+        ]);
     }
     public function logout(Request $request){
         Auth::logout();

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Auditable;
 
 class Preventive extends Model
 {
-    use HasFactory;
+    use HasFactory,Auditable;
     protected $table = 'Preventive';
     protected $primaryKey ='id_preventive';
     protected $keyType = 'string';

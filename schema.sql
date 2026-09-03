@@ -53,6 +53,7 @@ create Table IF NOT EXISTS Materiel(
     type VARCHAR(50) NOT NULL,
     date_achat DATETIME NOT NULL,
     etat_operationnel VARCHAR(50) DEFAULT 'fonctionnel' NOT NULL,
+    localisation VARCHAR(100) NULL,
     id_service INTEGER not NULL,
     id_responsable INTEGER NOT NULL,
     foreign KEY (id_service) REFERENCES Service(id_service) on delete RESTRICT,

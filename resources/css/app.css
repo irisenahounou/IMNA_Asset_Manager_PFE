@@ -6,4 +6,13 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Palette officielle IMNA (issue du Figma) */
+    --color-darkbg: #0f0f12;
+    --color-darkcard: #18181c;
+    --color-darkborder: #27272a;
+    --color-limeacc: #bef264;
+    --color-limetext: #d9f99d;
 }
+
+[x-cloak] { display: none !important; }

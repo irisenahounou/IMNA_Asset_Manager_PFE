@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Auditable;
 
 class Panne extends Model
 {
-    use HasFactory;
+    use HasFactory,Auditable;
     protected $table = 'Panne';
     protected $primaryKey = 'id';
     public $incrementing = true;
@@ -15,6 +16,7 @@ class Panne extends Model
     protected $fillable = [
        'titre',
         'description',
+         'photo',  
         'date_declaration',
         'statut',
         'id_materiel',

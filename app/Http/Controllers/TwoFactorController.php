@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Cache;
 use App\Models\Utilisateur;
+use App\Services\AuditService;
 
 class TwoFactorController extends Controller
 {
@@ -48,6 +49,12 @@ class TwoFactorController extends Controller
         session()->forget('2fa_user_id');
         Auth::login($user);
         $request->session()->regenerate();
+
+        // TRAÇABILITÉ AUDIT : Enregistrement de la connexion réussie avec l'adresse IP
+        AuditService::enregistrer (
+            'Connexion Système',
+            "Connexion réussie de l'utilisateur {$user->prenom} {$user->nom} ({$user->email})"
+        );
         if ($user->estResponsable()){
            return redirect()->route('responsable.dashboard'); 
         }

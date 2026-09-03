@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Auditable;
 
 class Technicien extends Model
 {
-    use HasFactory;
+    use HasFactory,Auditable;
     protected $table = 'Technicien';
     protected $primaryKey = 'id_technicien';
     public $incrementing = false;

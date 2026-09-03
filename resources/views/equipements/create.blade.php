@@ -20,23 +20,42 @@
             @csrf
 
             <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-2">ID de l'équipement </label>
+                <input type="text" name="id" required placeholder="Ex: MAT-305" class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-2">Numéro de série</label>
+                <input type="text" name="numero_serie" maxlength="100" required placeholder="Ex: SN-DJI-T40-001" value="{{ old('numero_serie') }}" class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+            </div>
+
+            <div>
                 <label class="block text-xs font-semibold text-gray-300 mb-2">Nom de l'équipement</label>
-                <input type="text" name="nom_equipement" required placeholder="Ex: Serveur Rack 05, Imprimante 3D..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+                <input type="text" name="nom_equipement" required placeholder="Ex: Serveur Rack 05, Drone..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+            </div>
+            <div>
+           <label class="block text-xs font-semibold text-gray-300 mb-2">Emplacement / Localisation (Optionnel)</label>
+          <input type="text" name="localisation" placeholder="Ex: Salle Serveur - DSI, Atelier R&D..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-2">Domaine / Type d'utilisation</label>
-                <input type="text" name="type_equipement" required placeholder="Ex: Serveur, Drone, PC..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+                <label class="block text-xs font-semibold text-gray-300 mb-2">Type d'équipement</label>
+                <input type="text" name="type" required placeholder="Ex: Serveur, Drone, PC..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-2">Statut de l'équipement</label>
-                <input type="text" value="Opérationnel (automatique)" disabled class="w-full bg-darkbg/50 border border-darkborder/50 rounded-lg p-3 text-sm text-gray-500 cursor-not-allowed">
+                <label class="block text-xs font-semibold text-gray-300 mb-2">Date d'achat</label>
+                <input type="date" name="date_achat" required class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-gray-300 mb-2">Emplacement / Localisation (Optionnel)</label>
-                <input type="text" name="localisation" placeholder="Ex: Salle Serveur - DSI, Atelier R&D..." class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+                <label class="block text-xs font-semibold text-gray-300 mb-2">ID du Service</label>
+                <input type="number" name="id_service" required placeholder="Ex: 1" class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-2">ID du Responsable</label>
+                <input type="number" name="id_responsable" required placeholder="Ex: 1" class="w-full bg-darkbg border border-darkborder rounded-lg p-3 text-sm text-white focus:outline-none focus:border-limeacc">
             </div>
 
             <button type="submit" class="w-full bg-limeacc hover:bg-lime-400 text-black font-bold py-3 rounded-lg text-sm transition">
