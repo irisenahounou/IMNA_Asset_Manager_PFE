@@ -56,7 +56,7 @@ class TwoFactorController extends Controller
             "Connexion réussie de l'utilisateur {$user->prenom} {$user->nom} ({$user->email})"
         );
         if ($user->estResponsable()){
-           return redirect()->route('responsable.dashboard'); 
+           return redirect()->route('dashboard'); 
         }
         return redirect()->route('technicien.dashboard');
     }

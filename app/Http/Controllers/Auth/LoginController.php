@@ -51,7 +51,13 @@ class LoginController extends Controller
        }
        Auth::login($user);
        $request->session()->regenerate();
-       return redirect()->intended('/dashboard');
+       if ($roleTexte === 'responsable') {
+         return redirect()->intended(route('dashboard'));
+         } elseif ($roleTexte === 'technicien') {
+            return redirect()->intended(route('technicien.dashboard'));
+       } else {
+        return redirect()->intended(route('employe.dashboard'));
+       }
     
     }
     public function apiLogin(Request $request)

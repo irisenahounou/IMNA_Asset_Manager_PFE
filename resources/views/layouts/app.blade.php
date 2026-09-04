@@ -53,40 +53,46 @@
 
             <!-- Navigation -->
             <nav class="space-y-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-limeacc text-black font-semibold">
-                    📊 Dashboard
-                </a>
-                <a href="{{ route('preventives.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
-                   🛡️ Maintenance Préventive
-                </a>
-                <a href="{{ route('equipements.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
-                    📦 Parc Matériel
-                </a>
-                <a href="{{ route('composants.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
-                     🗄️ Gestion des Stocks
-                </a>
-                <a href="{{ route('reparations.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
-                    🛠️ Interventions / Pannes
-                </a>
-                <a href="{{ route('responsable.audits') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('responsable.audits') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
-                    <!-- Icône SVG Journal d'Audit -->
-                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('responsable.audits') ? 'text-black' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                    </svg>
-                    Journal d'Audit
-                </a>
-<a href="{{ route('dashboard.usure') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('dashboard.usure') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
-                    <!-- Icône de graphique ou d'outil -->
-                    <svg class="w-5 h-5 mr-3 {{ request()->routeIs('dashboard.usure') ? 'text-black' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                    <span>Analyse d'Usure du Parc</span>
-                </a>
-                @if(Auth::check() && Auth::user()->estResponsable())
-<a href="{{ route('utilisateurs.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('utilisateurs.*') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
-    🔐 Accès Mobiles
-</a>
-@endif
+                @if(Auth::user()->estResponsable())
+                    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('dashboard') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        📊 Dashboard
+                    </a>
+                    <a href="{{ route('preventives.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
+                       🛡️ Maintenance Préventive
+                    </a>
+                    <a href="{{ route('equipements.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
+                        📦 Parc Matériel
+                    </a>
+                    <a href="{{ route('composants.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
+                         🗄️ Gestion des Stocks
+                    </a>
+                    <a href="{{ route('reparations.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-400 hover:bg-darkborder hover:text-white transition">
+                        🛠️ Interventions / Pannes
+                    </a>
+                    <a href="{{ route('responsable.audits') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('responsable.audits') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        <svg class="w-5 h-5 mr-3 {{ request()->routeIs('responsable.audits') ? 'text-black' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        Journal d'Audit
+                    </a>
+                    <a href="{{ route('dashboard.usure') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('dashboard.usure') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        <svg class="w-5 h-5 mr-3 {{ request()->routeIs('dashboard.usure') ? 'text-black' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>Analyse d'Usure du Parc</span>
+                    </a>
+                    <a href="{{ route('utilisateurs.index') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('utilisateurs.*') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        🔐 Accès Mobiles
+                    </a>
+                @elseif(Auth::user()->estTechnicien())
+                    <a href="{{ route('technicien.dashboard') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('technicien.dashboard') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        🛠️ Mes Interventions
+                    </a>
+                @else
+                    <a href="{{ route('employe.dashboard') }}" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('employe.dashboard') ? 'bg-limeacc text-black font-semibold' : 'text-gray-400 hover:bg-darkborder hover:text-white transition' }}">
+                        📊 Dashboard
+                    </a>
+                @endif
             </nav>
         </div>
 
