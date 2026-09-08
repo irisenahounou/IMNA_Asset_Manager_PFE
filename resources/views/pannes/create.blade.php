@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
+@section('title', 'Déclarer une panne')
+@section('role-badge', 'Responsable')
+
 @section('content')
-<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; width: 100%;">
-    <div style="width: 100%; max-width: 480px; margin: 0 auto;">
-        
-        {{-- Titre centré --}}
-        <h1 class="text-white fw-bold mb-4 text-center" style="font-size: 2.2rem; letter-spacing: -0.5px;">
+<div class="flex justify-center items-center min-h-[80vh] w-full">
+    <div class="w-full max-w-md mx-auto">
+
+        <h1 class="text-white font-bold mb-8 text-center text-3xl tracking-tight">
             Signalez un Incident
         </h1>
 
-        {{-- Message d'erreur de validation --}}
         @if ($errors->any())
-            <div class="alert alert-danger mb-4" style="background-color: #3a1c1c; border: 1px solid #5a2424; color: #f87171; border-radius: 10px;">
-                <ul class="mb-0 ps-3">
+            <div class="mb-4 p-4 bg-red-950 border border-red-800 text-red-300 text-sm rounded-lg">
+                <ul class="list-disc pl-5">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -20,37 +21,40 @@
             </div>
         @endif
 
-        <form action="{{ route('pannes.store') }}" method="POST">
+        <form action="{{ route('pannes.store') }}" method="POST" class="space-y-4">
             @csrf
 
-            {{-- Titre par défaut (nécessaire pour la BDD) --}}
             <input type="hidden" name="titre" value="Incident matériel">
 
-            {{-- Menu déroulant équipement --}}
-            <div class="mb-3">
-                <select name="id_materiel" class="form-select text-white border-0 py-3 px-3 w-100" style="background-color: #242526; border-radius: 10px; font-size: 0.95rem;" required>
-    <option value="" disabled selected>Sélectionnez l'équipement (ex: Imprimante, PC...)</option>
-    @foreach($materiels as $materiel)
-        <option value="{{ $materiel->id }}" {{ old('id_materiel') == $materiel->id ? 'selected' : '' }}>
-            {{ $materiel->nom_equipement }} (ID: {{ $materiel->id }})
-        </option>
-    @endforeach
+            <div>
+                <select name="id_materiel" required class="w-full bg-darkcard border border-darkborder rounded-lg py-3 px-3 text-sm text-white focus:outline-none focus:border-limeacc">
+                    <option value="" disabled selected>Sélectionnez l'équipement (ex: Imprimante, PC...)</option>
+                    @foreach($materiels as $materiel)
+                        <option value="{{ $materiel->id }}" {{ old('id_materiel') == $materiel->id ? 'selected' : '' }}>
+                            {{ $materiel->nom_equipement }} (ID: {{ $materiel->id }})
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
-            {{-- Identifiant Employé --}}
-            <div class="mb-3">
-                <input type="number" name="id_employe" class="form-control text-white border-0 py-3 px-3 w-100" style="background-color: #242526; border-radius: 10px; font-size: 0.95rem;" value="{{ old('id_employe', auth()->user()->id_utilisateur ?? 1) }}" placeholder="Identifiant employé" required>
+            <div>
+                <select name="id_employe" required class="w-full bg-darkcard border border-darkborder rounded-lg py-3 px-3 text-sm text-white focus:outline-none focus:border-limeacc">
+                    <option value="" disabled selected>Sélectionnez l'employé concerné</option>
+                    @foreach($employes as $employe)
+                        <option value="{{ $employe->id_employe }}" {{ old('id_employe') == $employe->id_employe ? 'selected' : '' }}>
+                            {{ $employe->prenom }} {{ $employe->nom }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
-            {{-- Zone de texte description --}}
-            <div class="mb-4">
-                <textarea name="description" rows="4" class="form-control text-white border-0 py-3 px-3 w-100" style="background-color: #242526; border-radius: 10px; font-size: 0.95rem; resize: none;" placeholder="Décrivez le problème rencontré en quelques mots..." required>{{ old('description') }}</textarea>
+            <div>
+                <textarea name="description" rows="4" required placeholder="Décrivez le problème rencontré en quelques mots..."
+                    class="w-full bg-darkcard border border-darkborder rounded-lg py-3 px-3 text-sm text-white focus:outline-none focus:border-limeacc resize-none">{{ old('description') }}</textarea>
             </div>
 
-            {{-- Bouton Vert Néon Figma --}}
-            <button type="submit" class="btn w-100 fw-bold py-3 text-dark" style="background-color: #d4f570; border-radius: 10px; border: none; font-size: 1rem;">
-                soumettre la declaration
+            <button type="submit" class="w-full bg-limeacc hover:bg-lime-400 text-black font-bold py-3 rounded-lg text-sm transition">
+                Soumettre la déclaration
             </button>
         </form>
 

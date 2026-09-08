@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Interventions & Réparations')
+@section('role-badge', 'Responsable')
+
 @section('content')
 <div class="p-6 max-w-7xl mx-auto">
     <!-- En-tête -->
@@ -10,19 +13,18 @@
         </div>
     </div>
 
-    <!-- Message de succès éventuel -->
     @if(session('success'))
-        <div class="mb-6 bg-lime-500/10 border border-lime-500/20 text-lime-400 px-4 py-3 rounded-lg text-sm">
+        <div class="mb-6 bg-lime-500/10 border border-limeacc/20 text-limeacc px-4 py-3 rounded-lg text-sm">
             {{ session('success') }}
         </div>
     @endif
 
     <!-- Tableau des réparations -->
-    <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-lg">
+    <div class="bg-darkcard border border-darkborder rounded-xl overflow-hidden shadow-lg">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-gray-800/50 border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
+                    <tr class="bg-darkbg/50 border-b border-darkborder text-gray-400 text-xs uppercase tracking-wider">
                         <th class="px-6 py-4">ID Réparation</th>
                         <th class="px-6 py-4">Panne / Matériel</th>
                         <th class="px-6 py-4">Technicien Assigné</th>
@@ -31,10 +33,10 @@
                         <th class="px-6 py-4">Rapport Technique</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-800 text-sm">
+                <tbody class="divide-y divide-darkborder text-sm">
                     @forelse($reparations as $rep)
-                        <tr class="hover:bg-gray-800/40 transition">
-                            <td class="px-6 py-4 font-mono text-lime-400 font-medium">#{{ $rep->id }}</td>
+                        <tr class="hover:bg-darkbg/40 transition">
+                            <td class="px-6 py-4 font-mono text-limeacc font-medium">#{{ $rep->id }}</td>
                             <td class="px-6 py-4">
                                 <div class="text-white font-medium">
                                     {{ $rep->panne->titre ?? 'Panne #' . $rep->id_panne }}

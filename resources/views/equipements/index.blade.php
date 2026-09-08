@@ -48,8 +48,17 @@
                             <td class="p-3 text-gray-400">{{ $equipement->type }}</td>
                             <td class="p-3 text-gray-400">{{ $equipement->localisation ?? 'Non spécifiée' }}</td>
                             <td class="p-3">
-                                <span class="px-2.5 py-1 bg-lime-950 text-limeacc border border-limeacc/30 rounded text-xs font-semibold">
-                                    Opérationnel
+                                 @php
+                                 $couleurStatut = match($equipement->etat_operationnel) {
+                                    'Fonctionnel', 'Opérationnel' => 'bg-lime-950 text-limeacc border-limeacc/30',
+                                    'En panne', 'Défectueux' => 'bg-red-950 text-red-400 border-red-500/30',
+                                    'Maintenance', 'En maintenance' => 'bg-amber-950 text-amber-400 border-amber-500/30',
+                                     default => 'bg-darkborder text-gray-300 border-darkborder',
+                                     };
+                                      @endphp
+
+                                 <span class="px-2.5 py-1 {{ $couleurStatut }} border rounded text-xs font-semibold">
+                                    {{ $equipement->etat_operationnel }}
                                 </span>
                             </td>
                             <td class="p-3 text-right flex items-center justify-end gap-2">

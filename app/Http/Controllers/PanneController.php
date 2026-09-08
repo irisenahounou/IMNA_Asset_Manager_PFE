@@ -20,7 +20,11 @@ class PanneController extends Controller
     public function create()
     {
         $materiels = Materiel::all();
-        return view('pannes.create', compact('materiels'));
+        $employes = \Illuminate\Support\Facades\DB::table('Employe')
+        ->join('Utilisateur', 'Employe.id_employe', '=', 'Utilisateur.id_utilisateur')
+        ->select('Employe.id_employe', 'Utilisateur.nom', 'Utilisateur.prenom')
+         ->get();
+        return view('pannes.create', compact('materiels', 'employes'));
     }
     public function store(Request $request)
     {

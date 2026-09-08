@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Analyse d\'Usure du Parc')
+@section('role-badge', 'Espace DSI')
+
 @section('content')
 <div class="container mx-auto px-4 py-6 text-gray-200">
     <!-- En-tête -->
@@ -7,14 +10,14 @@
         <h1 class="text-2xl font-bold text-white">Tableau de Bord - Analyse Prédictive d'Usure</h1>
         <form action="{{ route('analyser.usure.trigger') }}" method="POST">
             @csrf
-            <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg shadow font-semibold transition">
+            <button type="submit" class="bg-limeacc hover:bg-lime-400 text-black px-4 py-2 rounded-lg shadow font-semibold transition">
                 Relancer l'analyse Python
             </button>
         </form>
     </div>
 
     <!-- Section 1 : Graphique en Araignée (Radar) -->
-    <div class="bg-gray-800 border border-gray-700 p-6 rounded-lg shadow-md mb-8">
+    <div class="bg-darkcard border border-darkborder p-6 rounded-lg shadow-md mb-8">
         <h2 class="text-lg font-semibold text-white mb-4">Profil Multicritère des Équipements (Radar)</h2>
         <div class="relative w-full max-w-xl mx-auto h-80">
             <canvas id="radarChart"></canvas>
@@ -22,13 +25,13 @@
     </div>
 
     <!-- Section 2 : Tableau de Synthèse -->
-    <div class="bg-gray-800 border border-gray-700 rounded-lg shadow-md overflow-hidden">
-        <div class="px-6 py-4 bg-gray-900 border-b border-gray-700">
+    <div class="bg-darkcard border border-darkborder rounded-lg shadow-md overflow-hidden">
+        <div class="px-6 py-4 bg-darkbg border-b border-darkborder">
             <h2 class="text-lg font-semibold text-white">Détail du Parc Matériel</h2>
         </div>
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-700">
-                <thead class="bg-gray-900">
+            <table class="min-w-full divide-y divide-darkborder">
+                <thead class="bg-darkbg">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">ID Matériel</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Nom de l'équipement</th>
@@ -37,9 +40,9 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Statut Recommandé</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-700">
+                <tbody class="divide-y divide-darkborder">
                     @forelse($materiels as $materiel)
-                        <tr class="hover:bg-gray-700/50 transition">
+                        <tr class="hover:bg-darkbg/50 transition">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{{ $materiel->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $materiel->nom_equipement }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $materiel->date_achat ?? 'N/A' }}</td>
